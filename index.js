@@ -1,38 +1,22 @@
-const app = require("express")()
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
 
-app.post("/", (req,res) =>{
+const port = 3000;
+const app = express();
 
-    const cookie = req.headers.cookie;
-    if (cookie)
-        res.sendFile(`${__dirname}/cookie.png`)
-    else{
-        res.sendStatus(403);
-        res.end();
-    }
-})
-app.post("/login", (req, res) => {
-    //const cookie = "user=hussein; samesite=strict; secure";
-    const cookie = "user=hussein; samesite=lax; secure";
-    //const cookie = "user=hussein; samesite=none; secure";
-    //const cookie = "user=hussein;";
-
-    res.setHeader("set-cookie", [cookie])
-    res.send("ok")
-})
-
+app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
-    res.sendFile(`${__dirname}/index.html`)
-})
+    res.setHeader("Set-Cookie", [
+        "user_name=sabbir-hosen; Max-Age=3600; SameSite=None; Secure"
+    ])
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
-app.get("/img", (req, res) => {
-    const cookie = req.headers.cookie;
-    if (cookie)
-        res.sendFile(`${__dirname}/cookie.png`)
-    else{
-        res.sendStatus(403);
-        res.end();
-    }
-})
-  
-app.listen(8080, ()=>console.log("listening on port 8080"))
+
+
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+});

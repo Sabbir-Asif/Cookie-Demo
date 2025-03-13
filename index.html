@@ -6,18 +6,8 @@
     <title>Cookie Demo</title>
 </head>
 <body>
-    <img src = '/img'>
-    <button id = 'btn'>Login</button>
-
-    <script>
-        const btn = document.getElementById("btn");
-
-        if (document.cookie)
-            btn.style.display = "none";
-
-        btn.addEventListener("click", e => {
-            fetch("/login", {"method":"POST"}).then(a=>a.text()).then(console.log)
-        })
-    </script>
+    <h2>Cookie Demo</h2> <br>
+    <!-- <a href="https://cookie-demo-five.vercel.app/">follow the link</a> -->
+    <img src="/cookie.png" alt="cookie-image">
 </body>
 </html>
